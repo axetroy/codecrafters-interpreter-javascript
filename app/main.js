@@ -21,16 +21,14 @@ const fileContent = fs.readFileSync(filename, "utf8");
 if (fileContent.length !== 0) {
   const lines = fileContent.split(/\n/);
 
-  let gotError = false
+  let gotError = false;
 
-  for (let lineIndex in lines) {
+  for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+    const lineNumber = lineIndex + 1;
     const line = lines[lineIndex];
-    const lineNumber = parseInt(lineIndex) + 1;
-
-    for (let columnIndex in line) {
-      const columnNumber = parseInt(columnIndex) + 1;
-
+    for (let columnIndex = 0; columnIndex < line.length; columnIndex++) {
       const char = line[columnIndex];
+      const nextChar = line[columnIndex + 1];
 
       switch (char) {
         case "(":
@@ -66,17 +64,28 @@ if (fileContent.length !== 0) {
         case "/":
           console.log("SLASH / null");
           break;
+        case "=":
+          if (nextChar === "=") {
+            console.log("EQUAL_EQUAL == null");
+            columnIndex++;
+          } else {
+            console.log("EQUAL = null");
+          }
+          break;
         default:
-          console.error(`[line ${lineNumber}] Error: Unexpected character: ${char}`)
+          console.error(
+            `[line ${lineNumber}] Error: Unexpected character: ${char}`
+          );
 
-          gotError = true
+          gotError = true;
       }
     }
   }
+
   console.log("EOF  null");
 
   if (gotError) {
-    process.exit(65)
+    process.exit(65);
   }
 } else {
   console.log("EOF  null");
