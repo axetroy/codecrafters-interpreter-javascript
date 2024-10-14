@@ -80,6 +80,22 @@ if (fileContent.length !== 0) {
             console.log("BANG ! null");
           }
           break;
+        case "<":
+          if (nextChar === "=") {
+            console.log("LESS_EQUAL <= null");
+            columnIndex++;
+          } else {
+            console.log("LESS < null");
+          }
+          break;
+        case ">":
+          if (nextChar === "=") {
+            console.log("GREATER_EQUAL >= null");
+            columnIndex++;
+          } else {
+            console.log("GREATER > null");
+          }
+          break;
         default:
           console.error(
             `[line ${lineNumber}] Error: Unexpected character: ${char}`
