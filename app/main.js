@@ -247,11 +247,22 @@ function tokenize(content) {
 
 /**
  *
- * @param {Array<Token | Error>} tokens
+ * @param {Array<Token>} tokens
  */
 function parse(tokens) {
-  for (const token of tokens) {
-    console.log(token.lexeme);
+  for (const token of tokens.filter((token) => !(token instanceof Error))) {
+    switch (token.type) {
+      case "NIL":
+      case "FALSE":
+      case "TRUE": {
+        console.log(token.lexeme);
+        break;
+      }
+      case "NUMBER": {
+        console.log(token.literal);
+        break;
+      }
+    }
   }
 }
 
