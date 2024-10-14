@@ -164,6 +164,22 @@ if (fileContent.length !== 0) {
             break;
           }
 
+          // Handle Identifier
+          if (/[a-zA-Z_]/.test(char)) {
+            let identifier = char;
+            for (let i = columnIndex + 1; i < line.length; i++) {
+              if (/[a-zA-Z0-9_]/.test(line[i])) {
+                identifier += line[i];
+                columnIndex = i;
+              } else {
+                break;
+              }
+            }
+
+            console.log(`IDENTIFIER ${identifier} null`);
+            break;
+          }
+
           console.error(
             `[line ${lineNumber}] Error: Unexpected character: ${char}`
           );
