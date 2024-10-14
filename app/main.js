@@ -119,8 +119,8 @@ if (fileContent.length !== 0) {
             console.log(`STRING "${str}" ${str}`);
           } else {
             console.error(`[line ${lineNumber}] Error: Unterminated string.`);
-            gotError = true
-            break lineLoop
+            gotError = true;
+            break lineLoop;
           }
 
           break;
@@ -128,6 +128,39 @@ if (fileContent.length !== 0) {
         default:
           // SKip whitespaces
           if (/\s/.test(char)) {
+            break;
+          }
+
+          // Handle Number
+          if (/[0-9]/.test(char)) {
+            let numberStr = char;
+            for (let i = columnIndex + 1; i < line.length; i++) {
+              if (/[0-9]/.test(line[i])) {
+                numberStr += line[i];
+                columnIndex = i;
+              } else if (line[i] === ".") {
+                if (numberStr.includes(".")) {
+                  console.error(
+                    `[line ${lineNumber}] Error: Unexpected character: ${line[i]}`
+                  );
+                  gotError = true;
+                  break lineLoop;
+                } else {
+                  numberStr += line[i];
+                  columnIndex = i;
+                }
+              } else {
+                break;
+              }
+            }
+
+            const number = Number(numberStr);
+
+            console.log(
+              `NUMBER ${numberStr} ${
+                Number.isInteger(number) ? number + ".0" : number
+              }`
+            );
             break;
           }
 
