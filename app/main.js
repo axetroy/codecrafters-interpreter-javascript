@@ -72,6 +72,14 @@ if (fileContent.length !== 0) {
             console.log("EQUAL = null");
           }
           break;
+        case "!":
+          if (nextChar === "=") {
+            console.log("BANG_EQUAL != null");
+            columnIndex++;
+          } else {
+            console.log("BANG ! null");
+          }
+          break;
         default:
           console.error(
             `[line ${lineNumber}] Error: Unexpected character: ${char}`
