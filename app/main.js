@@ -100,7 +100,6 @@ if (fileContent.length !== 0) {
         case "/":
           if (nextChar === "/") {
             // Go to the next line
-            lineIndex++;
             break lineLoop;
           } else {
             console.log("SLASH / null");
