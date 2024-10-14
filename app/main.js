@@ -26,7 +26,11 @@ if (fileContent.length !== 0) {
   for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
     const lineNumber = lineIndex + 1;
     const line = lines[lineIndex];
-    for (let columnIndex = 0; columnIndex < line.length; columnIndex++) {
+    lineLoop: for (
+      let columnIndex = 0;
+      columnIndex < line.length;
+      columnIndex++
+    ) {
       const char = line[columnIndex];
       const nextChar = line[columnIndex + 1];
 
@@ -61,9 +65,6 @@ if (fileContent.length !== 0) {
         case "*":
           console.log("STAR * null");
           break;
-        case "/":
-          console.log("SLASH / null");
-          break;
         case "=":
           if (nextChar === "=") {
             console.log("EQUAL_EQUAL == null");
@@ -94,6 +95,15 @@ if (fileContent.length !== 0) {
             columnIndex++;
           } else {
             console.log("GREATER > null");
+          }
+          break;
+        case "/":
+          if (nextChar === "/") {
+            // Go to the next line
+            lineIndex++;
+            break lineLoop;
+          } else {
+            console.log("SLASH / null");
           }
           break;
         default:
