@@ -105,6 +105,26 @@ if (fileContent.length !== 0) {
             console.log("SLASH / null");
           }
           break;
+        case '"': {
+          let str = undefined;
+          for (let i = columnIndex + 1; i < line.length; i++) {
+            if (line[i] === '"') {
+              str = line.substring(columnIndex + 1, i);
+              columnIndex = i;
+              break;
+            }
+          }
+
+          if (typeof str === "string") {
+            console.log(`STRING "${str}" ${str}`);
+          } else {
+            console.error(`[line ${lineNumber}] Error: Unterminated string.`);
+            gotError = true
+            break lineLoop
+          }
+
+          break;
+        }
         default:
           // SKip whitespaces
           if (/\s/.test(char)) {
