@@ -107,6 +107,11 @@ if (fileContent.length !== 0) {
           }
           break;
         default:
+          // SKip whitespaces
+          if (/\s/.test(char)) {
+            break;
+          }
+
           console.error(
             `[line ${lineNumber}] Error: Unexpected character: ${char}`
           );
