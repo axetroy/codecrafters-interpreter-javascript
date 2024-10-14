@@ -176,7 +176,30 @@ if (fileContent.length !== 0) {
               }
             }
 
-            console.log(`IDENTIFIER ${identifier} null`);
+            const reservedWords = [
+              "and",
+              "class",
+              "else",
+              "false",
+              "for",
+              "fun",
+              "if",
+              "nil",
+              "or",
+              "print",
+              "return",
+              "super",
+              "this",
+              "true",
+              "var",
+              "while",
+            ];
+
+            if (reservedWords.includes(identifier)) {
+              console.log(`${identifier.toUpperCase()} ${identifier} null`);
+            } else {
+              console.log(`IDENTIFIER ${identifier} null`);
+            }
             break;
           }
 
